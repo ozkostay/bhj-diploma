@@ -2,6 +2,7 @@
 
 ## Описание
 
+
 Видеодемонстрация и описание (нажмите на изображение):
 
 [![BHJ Diploma](https://img.youtube.com/vi/zXOyBIajWsM/0.jpg)](https://www.youtube.com/watch?v=zXOyBIajWsM)

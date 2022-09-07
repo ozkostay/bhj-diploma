@@ -1,9 +1,12 @@
 .user-panel {
   display: none;
+  /* display: block; */
+
 }
 
 .transactions-panel {
   display: none;
+  
 }
 
 .accounts-panel {

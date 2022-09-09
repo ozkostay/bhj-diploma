@@ -13,7 +13,6 @@ class Modal {
    * */
   constructor(element){
     this.element = element;
-    //console.log('modal-constructor', element);
     this.registerEvents();
   }
 
@@ -23,7 +22,25 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    console.log('modal-registerEvents', this.element);
+    const closButtons = Array.from(this.element.querySelectorAll('[data-dismiss="modal"]'));
+    closButtons.forEach( (item) => {
+      item.addEventListener('click', () => {
+        this.onClose();
+      })
+    });
+    
+    // const submitButton = this.element.querySelector('.btn-primary');
+    // //console.log('bbb ', submitButton.getAttribute('form'));
+    // submitButton.addEventListener('click', () => {
+    // //   //console.log(submitButton.form.value);
+    //   //LoginForm.onSubmit();
+    //   // LoginForm
+    //   console.log('press button');
+    //   // let aaa = new LoginForm();
+    //   // aaa.onSubmit('data_bebe');
+    //   let aaa = App.forms;
+    //   console.log('ddddd ',aaa);
+    // })
   }
 
   /**
@@ -31,20 +48,20 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    console.log('modal-onClose');
+    //console.log('=!=== e', e);
+    this.close();
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display
    * со значением «block»
    * */
   open() {
-    console.log('modal-open');
+    this.element.setAttribute('style', 'display: block');
   }
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
-    console.log('modal-close', this.element);
-
+    this.element.setAttribute('style', 'display: none');
   }
 }

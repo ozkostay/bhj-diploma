@@ -13,7 +13,7 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-
+    console.log('AsyncФорм после конструктора ', element);
   }
 
   /**
@@ -36,7 +36,7 @@ class AsyncForm {
   }
 
   onSubmit(options){
-
+    console.log('AsincForm.onSubmit', options);
   }
 
   /**

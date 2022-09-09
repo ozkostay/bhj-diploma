@@ -35,25 +35,17 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
-    //const registerButton = document.querySelector('li.menu-item_register');
-    //const registerButtons = Array.from(document.querySelectorAll('sidebar-menu'));
     const registerButton = document.querySelector('.sidebar'); 
     console.log(registerButton);
     registerButton.addEventListener('click', (item) => {
-      console.log('item ', item.target);
-      if ( item.target.outerText === "Регистрация" ) {
-        App.getModal('register').element.setAttribute('style', 'display: block');
-      } else if ( item.target.outerText === "Вход" ) {
-        App.getModal('login').element.setAttribute('style', 'display: block');
+      if ( item.target.outerText === "Вход" ) {
+        App.getModal('login').open();
+      } else if ( item.target.outerText === "Регистрация" ) {
+        //console.log(App.getModal('register')); 
+        App.getModal('register').open();
+      } else if ( item.target.outerText === "Выход" ) {
+        App.setState( 'init' );
       }
-    //   // let aaa = App.getModal('register');
-    //   ////App.getModal('register').element.setAttribute('style', 'display: block');
-    //   // console.log('1111 ', aaa);
-    //   // aaa.element.setAttribute('style', 'display: block')
     })
-    //const reg2 = new Modal(reg);
-    //console.log('111 ', App.getModal('register'));
-    //console.log('222 ', App.modals);
-    //console.log(reg2);
   }
 }

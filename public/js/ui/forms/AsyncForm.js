@@ -13,7 +13,13 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-    console.log('AsyncФорм после конструктора ', element);
+    //console.log('AsyncФорм после конструктора ', element);
+    this.element = element;
+    this.registerEvents();
+    //console.log("=== modal-content ", element.closest("div.modal-content"));
+    //div class="modal-content
+    
+    
   }
 
   /**
@@ -21,7 +27,13 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
+    const submitButton = this.element.closest("div.modal-content").querySelector('button.btn-primary');
+    console.log('AsyncФорм кнопки ', submitButton);
 
+    submitButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.onSubmit(this.element);
+    });
   }
 
   /**

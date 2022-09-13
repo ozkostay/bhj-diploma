@@ -35,17 +35,18 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
-    const registerButton = document.querySelector('.sidebar'); 
-    console.log(registerButton);
-    registerButton.addEventListener('click', (item) => {
-      if ( item.target.outerText === "Вход" ) {
-        App.getModal('login').open();
-      } else if ( item.target.outerText === "Регистрация" ) {
-        //console.log(App.getModal('register')); 
-        App.getModal('register').open();
-      } else if ( item.target.outerText === "Выход" ) {
-        App.setState( 'init' );
-      }
-    })
+    const sidebarButtons = Array.from(document.querySelectorAll('li.menu-item')); 
+    //console.log('mimimi ', sidebarButtons);
+    sidebarButtons.forEach( (item) => {
+      item.addEventListener('click', (event) => {
+        if ( item.classList.contains('menu-item_login') ) {
+          App.getModal('login').open();
+        } else if ( item.classList.contains('menu-item_register') ) {
+          App.getModal('register').open();
+        } else if ( item.classList.contains('menu-item_logout') ) {
+          App.setState( 'init' );
+        }
+      });    
+    });
   }
 }

@@ -62,6 +62,7 @@ class Modal {
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
+    console.log('00000000000000 ', this.element);
     this.element.setAttribute('style', 'display: none');
   }
 }

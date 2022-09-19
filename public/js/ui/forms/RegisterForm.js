@@ -11,5 +11,8 @@ class RegisterForm extends AsyncForm {
    * */
   onSubmit(data) {
     console.log('RegisterForm.onSubmit', data);
+    let callback = () => { console.log('WWWWWWWWWWWWWWWW') };
+    User.register(data, callback);
+    
   }
 }

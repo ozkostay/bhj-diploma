@@ -28,8 +28,6 @@ class AsyncForm {
    * */
   registerEvents() {
     const submitButton = this.element.closest("div.modal-content").querySelector('button.btn-primary');
-    console.log('AsyncФорм кнопки ', submitButton);
-
     submitButton.addEventListener('click', (event) => {
       event.preventDefault();
       this.onSubmit(this.element);

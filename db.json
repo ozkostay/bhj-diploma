@@ -5,6 +5,18 @@
       "email": "demo@demo",
       "password": "demo",
       "id": "1"
+    },
+    {
+      "name": "konst",
+      "email": "konst@konst",
+      "password": "123",
+      "id": "8cyi0ixfcl88ys8kr"
+    },
+    {
+      "name": "konst2",
+      "email": "konst2@konst",
+      "password": "123",
+      "id": "8cyi0ixkzl88ytgv6"
     }
   ],
   "accounts": [

@@ -35,8 +35,8 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
+    // Вешаем click на кнопки сайд бара
     const sidebarButtons = Array.from(document.querySelectorAll('li.menu-item')); 
-    //console.log('mimimi ', sidebarButtons);
     sidebarButtons.forEach( (item) => {
       item.addEventListener('click', (event) => {
         if ( item.classList.contains('menu-item_login') ) {
@@ -44,9 +44,15 @@ class Sidebar {
         } else if ( item.classList.contains('menu-item_register') ) {
           App.getModal('register').open();
         } else if ( item.classList.contains('menu-item_logout') ) {
+          localStorage.clear();
           App.setState( 'init' );
         }
       });    
     });
+
+    
+
+    
+
   }
 }

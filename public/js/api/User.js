@@ -4,12 +4,22 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
+  static URL = "/user";
+  
   /**
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
   static setCurrent(user) {
     console.log('User.setCurrent() ', user);
+    localStorage.setItem('id', user.id);
+    localStorage.setItem('name', user.name);
+    
+    // setCookie ('email', user.email.trim());
+    // setCookie ('password', user.password );
+    // function setCookie ( name, value) {
+    //    document.cookie = name + '=' + encodeURIComponent(value);
+    // }
   }
 
   /**
@@ -25,7 +35,10 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    console.log('User.current() ');
+    //aaa = localStorage.getItem('id');
+    //console.log('User.current() ', localStorage.getItem('id'));
+    //return localStorage.getItem('id');
+    return localStorage.getItem('name');
   }
 
   /**
@@ -44,55 +57,33 @@ class User {
    * User.setCurrent.
    * */
   static login(data, callback) {
-    console.log('User.login() ', data);
-    console.log('User.login() URL', URL);
-        
-    // было изначально
+    //console.log('User.login() ', data);
+    //console.log('User.login() URL', User.URL);
+    
     createRequest({
-      url: URL + '/login',
+      url: User.URL + '/login',
       method: 'POST',
       responseType: 'json',
       data,
       callback: (err, response) => {
         if (response && response.user) {
-          this.setCurrent(response.user);
+          User.setCurrent(response.user);
+          data.reset();
+          App.getModal('login').close();
+          App.setState('user-logged');
+        } else {
+          alert(err);
         }
-        callback(err, response);
+        //console.log('888', response);
+        //console.log('8882', response.user);
+        //callback(err, response);
       }
     });
 
-    // console.log('11111111111');
-    // //console.log('333333333333', createRequest());
-    // console.log('222222222222');
-    
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      console.log('сработал онлоад');
-      if (  xhr.status === 200 ) {
-        console.log('Да === 200');
-          if ( xhr.response.success ) {
-              console.log(xhr.response);
-              //setCookie ('login', form.login.value.trim());
-              //setCookie ('user_id', user_id );
-          } else {
-              alert('Неверный логин/пароль');
-          }
-      } else {
-        console.log('Статус НЕ 200 ===  стр 86');
-      }
-      //form.reset(); 
-    };
-    
-    xhr.open('POST', 'localhost:8000/login');
-    const formData = new FormData(data);
-    xhr.responseType = 'json';
-    xhr.send(formData);
+    console.log('909090909090 ');
 
-    
 
-    // function setCookie (name, value) {
-    //   document.cookie = name + '=' + encodeURIComponent(value);
-    // }
+  
   
     // function getCookie (name) {
     //     const allCookies = document.cookie.split('; ');
@@ -108,7 +99,27 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    console.log('User.register() ', callback);
+    console.log('User.register() ', data);
+    //User.login(data);
+    
+    
+    createRequest({
+      url: User.URL + '/register',
+      method: 'POST',
+      responseType: 'json',
+      data,
+      callback: (err, response) => {
+        if (response && response.user) {
+          User.setCurrent(response.user);
+          data.reset();
+          App.getModal('register').close();
+          App.setState('user-logged');
+        } else {
+          alert(err);
+        }
+      }
+    });
+    
   }
 
   /**

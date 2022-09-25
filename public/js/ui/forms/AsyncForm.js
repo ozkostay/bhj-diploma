@@ -46,7 +46,7 @@ class AsyncForm {
       data = {
         email: 'demo@demo',
         password: 'demo'
-      }; // На следующих этапах поправить с другими формами
+      }; // На следующих этапах поправить при работе с другими формами
     }
     //console.log('DD_Data ', data);
     return this.element;

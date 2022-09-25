@@ -99,7 +99,7 @@ class User {
    * */
   static logout(callback) {
     callback();
-    App.init();
+    App.setState( 'init' );
     console.log('User.logout() ');
   }
 }

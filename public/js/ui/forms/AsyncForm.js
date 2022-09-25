@@ -13,13 +13,8 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-    //console.log('AsyncФорм после конструктора ', element);
     this.element = element;
     this.registerEvents();
-    //console.log("=== modal-content ", element.closest("div.modal-content"));
-    //div class="modal-content
-    
-    
   }
 
   /**
@@ -27,10 +22,11 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
+    console.log('Asy registerEvents');
     const submitButton = this.element.closest("div.modal-content").querySelector('button.btn-primary');
     submitButton.addEventListener('click', (event) => {
       event.preventDefault();
-      this.onSubmit(this.element);
+      this.submit();
     });
   }
 
@@ -42,7 +38,18 @@ class AsyncForm {
    * }
    * */
   getData() {
-
+    console.log('Async getData ', this.element);
+    let data = this.element;
+    if ( (this.element.id === 'login-form') || (this.element.id === 'register-form') ) {
+      data = this.element;
+    } else {
+      data = {
+        email: 'demo@demo',
+        password: 'demo'
+      }; // На следующих этапах поправить с другими формами
+    }
+    //console.log('DD_Data ', data);
+    return this.element;
   }
 
   onSubmit(options){
@@ -54,6 +61,7 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-
+    console.log('Asy submit() 58 ' );
+    this.onSubmit( this.getData() );  
   }
 }

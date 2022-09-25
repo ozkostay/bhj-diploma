@@ -48,7 +48,7 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    //console.log('=!=== e', e);
+    console.log('=!=== e', e);
     this.close();
   }
   /**
@@ -56,13 +56,14 @@ class Modal {
    * со значением «block»
    * */
   open() {
+    console.log('Modal.open()');
     this.element.setAttribute('style', 'display: block');
   }
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
-    console.log('00000000000000 ', this.element);
+    // console.log('00000000000000 ', this.element);
     this.element.setAttribute('style', 'display: none');
   }
 }

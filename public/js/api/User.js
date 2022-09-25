@@ -11,15 +11,9 @@ class User {
    * локальном хранилище.
    * */
   static setCurrent(user) {
-    console.log('User.setCurrent() ', user);
+    //console.log('User.setCurrent() ', user);
     localStorage.setItem('id', user.id);
     localStorage.setItem('name', user.name);
-    
-    // setCookie ('email', user.email.trim());
-    // setCookie ('password', user.password );
-    // function setCookie ( name, value) {
-    //    document.cookie = name + '=' + encodeURIComponent(value);
-    // }
   }
 
   /**
@@ -28,6 +22,7 @@ class User {
    * */
   static unsetCurrent() {
     console.log('User.unsetCurrent() ' );
+    this.logout( () => { localStorage.clear() } ); 
   }
 
   /**
@@ -35,10 +30,10 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    //aaa = localStorage.getItem('id');
-    //console.log('User.current() ', localStorage.getItem('id'));
-    //return localStorage.getItem('id');
-    return localStorage.getItem('name');
+    let userObject = {};
+    userObject.name = localStorage.getItem('name');
+    userObject.id = localStorage.getItem('id');
+    return userObject.name;
   }
 
   /**
@@ -46,8 +41,8 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    console.log('User.fetch() ', callback());
-    //callback();
+    //console.log('User.fetch() ', callback);
+    callback();
   }
 
   /**
@@ -57,9 +52,7 @@ class User {
    * User.setCurrent.
    * */
   static login(data, callback) {
-    //console.log('User.login() ', data);
-    //console.log('User.login() URL', User.URL);
-    
+    console.log('User.login');
     createRequest({
       url: User.URL + '/login',
       method: 'POST',
@@ -68,28 +61,12 @@ class User {
       callback: (err, response) => {
         if (response && response.user) {
           User.setCurrent(response.user);
-          data.reset();
-          App.getModal('login').close();
-          App.setState('user-logged');
+          callback();
         } else {
           alert(err);
         }
-        //console.log('888', response);
-        //console.log('8882', response.user);
-        //callback(err, response);
       }
     });
-
-    console.log('909090909090 ');
-
-
-  
-  
-    // function getCookie (name) {
-    //     const allCookies = document.cookie.split('; ');
-    //     const isCookie = allCookies.find( (item) => item.startsWith( name+"=" ));
-    //     return isCookie ? isCookie.substr( name.length + 1 ): isCookie;
-    // }
   }
 
   /**
@@ -99,10 +76,7 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    console.log('User.register() ', data);
-    //User.login(data);
-    
-    
+    //console.log('User.register() ', data);
     createRequest({
       url: User.URL + '/register',
       method: 'POST',
@@ -111,15 +85,12 @@ class User {
       callback: (err, response) => {
         if (response && response.user) {
           User.setCurrent(response.user);
-          data.reset();
-          App.getModal('register').close();
-          App.setState('user-logged');
+          callback();
         } else {
           alert(err);
         }
       }
     });
-    
   }
 
   /**
@@ -127,6 +98,8 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static logout(callback) {
-    console.log('User.logout() ', callback);
+    callback();
+    App.init();
+    console.log('User.logout() ');
   }
 }

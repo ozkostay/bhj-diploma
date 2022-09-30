@@ -3,6 +3,7 @@
  * на сервер.
  * */
 const createRequest = (options) => {
+  //======================================================
   //console.log('createRequest', options);  
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
@@ -23,5 +24,15 @@ const createRequest = (options) => {
     xhr.responseType = options.responseType;
     xhr.send();
   }
+  //======================================================
   
+  
+  
+  
+
+
+
+
+
+
 };

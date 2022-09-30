@@ -69,7 +69,8 @@ class User {
       // }
       //==========================
       url: '/user/login',
-      method: 'POST',
+      //method: 'POST',
+      method: 'GET',
       responseType: 'json',
       data: {
         email: 'demo@demo',

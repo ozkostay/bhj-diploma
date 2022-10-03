@@ -55,31 +55,20 @@ class User {
     console.log('User.login');
     createRequest({
       //==========================
-      // url: User.URL + '/login',
-      // method: 'POST',
-      // responseType: 'json',
-      // data,
-      // callback: (err, response) => {
-      //   if (response && response.user) {
-      //     User.setCurrent(response.user);
-      //     callback();
-      //   } else {
-      //     alert(err);
-      //   }
-      // }
-      //==========================
-      url: '/user/login',
-      //method: 'POST',
-      method: 'GET',
+      url: User.URL + '/login',
+      method: 'POST',
       responseType: 'json',
-      data: {
-        email: 'demo@demo',
-        password: 'demo',
-      },
-      callback: (err, res) => {
-        console.log("err=", err)
-        console.log("res=", res)
+      data,
+      callback: (err, response) => {
+        if (response && response.user) {
+          User.setCurrent(response.user);
+          callback();
+        } else {
+          alert(err);
+        }
       }
+      //==========================
+      
     });
 
     

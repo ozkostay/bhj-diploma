@@ -18,16 +18,18 @@ const createRequest = (options) => {
     }
   };
   
-  if ( options.method === "POST" ) {
+  if ( options.method !== "GET" ) {
+    console.log('not GET');
     xhr.open(options.method, options.url);
     xhr.responseType = options.responseType;
     const formData = new FormData(options.data);
     xhr.send(formData);
   } else {
+    console.log('GET!!!');
     // const url = options.url + '?email=' + encodeURIComponent(options.data.email)
     // + '&password=' + encodeURIComponent(options.data.password);
     const url = options.url + '?id=' + encodeURIComponent(options.data.id);
-    // console.log('url: ', url);
+    console.log('url: ', url);
     xhr.open(options.method, url);
     xhr.responseType = options.responseType;
     xhr.send();
@@ -39,15 +41,16 @@ const createRequest = (options) => {
 // судя по файлу /routes/user.js в data должен быть id, а не email и password
 // в дальнейшем вместо "1" в id нужно будет подставлять id из локального хранилища.
 
-createRequest({
-  url: '/user/current',
-  method: 'GET',
-  responseType: 'json',
-  data : {
-    id: "1",
-  },
-  callback: (err, res) => {
-    console.log("err=", err);
-    console.log("res=", res);
-  }
-});
+// Тестовый запрос GET
+// createRequest({
+//   url: '/user/current',
+//   method: 'GET',
+//   responseType: 'json',
+//   data : {
+//     id: "1",
+//   },
+//   callback: (err, res) => {
+//     console.log("err=", err);
+//     console.log("res=", res);
+//   }
+// });

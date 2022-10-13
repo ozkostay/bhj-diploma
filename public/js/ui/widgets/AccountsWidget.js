@@ -14,7 +14,9 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    this.element = element;
+    this.registerEvents();
+    this.update();
   }
 
   /**
@@ -25,7 +27,14 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
+    // this.element
+    const newAccount = document.querySelector('.create-account');
+    newAccount.addEventListener('click', (event) => {
+      //const aaa = App.getWidget('accounts');
+      App.getModal('createAccount').open();
+    });
 
+    console.log('AccountsWidget registerEvents()', this.element);
   }
 
   /**
@@ -39,6 +48,26 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
+    const bbb = User.current();
+    if (bbb) {
+      console.log('YES AccWidg update()', bbb);
+      const data = {
+        id: '1'
+      };
+
+      let accountList = Account.list(data, () => {
+        console.log("AccWidg err=");
+        console.log("AccWidg res=");
+      });
+      //console.log('AccWidg update(59) Список счетов: ', accountList);
+
+
+
+
+
+    } else {
+      console.log('NO AccWidg update()', bbb);
+    }
 
   }
 

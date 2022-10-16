@@ -48,6 +48,7 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
+    console.log('AccWid update()');
     const isThereUser = User.current();
     if (isThereUser) {
       //console.log('YES AccWidg update()', isThereUser);
@@ -56,6 +57,7 @@ class AccountsWidget {
       Account.list(data, (err, response) => {
         if (response.success) {
           this.clear();
+          //console.log('AccWid 60 ', response.data);
           this.renderItem(response.data);
         } else {
           alert(err);

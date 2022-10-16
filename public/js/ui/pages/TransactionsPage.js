@@ -11,7 +11,8 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -28,7 +29,10 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
+    const buttonRemoveAccount = document.querySelector('button.remove-account');
+    buttonRemoveAccount.addEventListener('click', () => {
+      this.removeAccount();
+    });
   }
 
   /**
@@ -41,7 +45,29 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-
+    const result = confirm('Вы действительно хотите удалить счет?');
+    if (result) {
+      // удаляем текущий счет
+      const data = {};
+      const accounts = Array.from(document.querySelectorAll('li.account'));
+      if (accounts) {
+        const activeAccount = accounts.find((item) => item.classList.contains('active'));
+        // console.log('ID ================= ', activeAccount);
+        data.id = activeAccount.dataset.id
+      }
+      
+      Account.remove(data, (err, response) => {
+        if (response.success) {
+          // console.log('dddddddddddddd ', response);
+          App.updateWidgets();
+          App.updateForms();
+        } else {
+          alert(err);
+        }
+      });
+    } else {
+      console.log('Счет не удаляем');
+    }
   }
 
   /**

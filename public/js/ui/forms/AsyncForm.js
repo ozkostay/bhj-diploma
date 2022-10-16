@@ -38,7 +38,7 @@ class AsyncForm {
    * }
    * */
   getData() {
-    console.log('Async getData ', this.element);
+    // console.log('Async getData ', this.element);
     let data = this.element;
     if ( (this.element.id === 'login-form') || (this.element.id === 'register-form') ) {
       data = this.element;
@@ -53,7 +53,7 @@ class AsyncForm {
   }
 
   onSubmit(options){
-    console.log('AsincForm.onSubmit', options);
+    // console.log('AsincForm.onSubmit', options);
   }
 
   /**
@@ -61,7 +61,7 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    console.log('Asy submit() 58 ' );
+    // console.log('Asy submit() 58 ' );
     this.onSubmit( this.getData() );  
   }
 }

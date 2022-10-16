@@ -9,27 +9,32 @@ const createRequest = (options) => {
   xhr.onload = function() {
     // console.log('STATUS ', xhr.status);
     if (  xhr.status === 200 ) {
-      console.log('Запрос ' + options.method + ' выполнен');
+      // console.log('Запрос ' + options.method + ' выполнен');
       // console.log('error', xhr.response.error);
       // console.log('response', xhr.response);
       options.callback(xhr.response.error, xhr.response);
     } else {
-      console.error('Запрос не выполнен/ Статус: ', xhr.status);
+      // console.error('Запрос не выполнен/ Статус: ', xhr.status, xhr.response);
     }
   };
   
+  console.log('crReq metod!!!!!!!!!!!!!! ', options.method, options.data)
+
   if ( options.method !== "GET" ) {
-    console.log('not GET');
+    // console.log('not GET');
+    let formData;
+    if (options.method === 'DELETE') {
+      formData = options.data;
+    } else {
+      formData = new FormData(options.data);
+    }
     xhr.open(options.method, options.url);
     xhr.responseType = options.responseType;
-    const formData = new FormData(options.data);
     xhr.send(formData);
   } else {
-    console.log('GET!!!');
-    // const url = options.url + '?email=' + encodeURIComponent(options.data.email)
-    // + '&password=' + encodeURIComponent(options.data.password);
+    // console.log('GET!!!');
     const url = options.url + '?id=' + encodeURIComponent(options.data.id);
-    console.log('url: ', url);
+    // console.log('url: ', url);
     xhr.open(options.method, url);
     xhr.responseType = options.responseType;
     xhr.send();
@@ -37,6 +42,7 @@ const createRequest = (options) => {
   //======================================================
 };
 
+// тестовый запрос
 // Запрос GET вернул пользователя
 // судя по файлу /routes/user.js в data должен быть id, а не email и password
 // в дальнейшем вместо "1" в id нужно будет подставлять id из локального хранилища.

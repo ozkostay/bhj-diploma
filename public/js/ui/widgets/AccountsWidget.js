@@ -34,7 +34,7 @@ class AccountsWidget {
       App.getModal('createAccount').open();
     });
 
-    console.log('AccountsWidget registerEvents()', this.element);
+    // console.log('AccountsWidget registerEvents()', this.element);
   }
 
   /**
@@ -48,25 +48,22 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
-    const bbb = User.current();
-    if (bbb) {
-      console.log('YES AccWidg update()', bbb);
-      const data = {
-        id: '1'
-      };
-
-      let accountList = Account.list(data, () => {
-        console.log("AccWidg err=");
-        console.log("AccWidg res=");
+    const isThereUser = User.current();
+    if (isThereUser) {
+      //console.log('YES AccWidg update()', isThereUser);
+      const data = {};
+      data.id = localStorage.getItem('id').trim();
+      Account.list(data, (err, response) => {
+        if (response.success) {
+          this.clear();
+          this.renderItem(response.data);
+        } else {
+          alert(err);
+        }
       });
-      //console.log('AccWidg update(59) Список счетов: ', accountList);
-
-
-
-
-
+      
     } else {
-      console.log('NO AccWidg update()', bbb);
+      //console.log('NO AccWidg update()', isThereUser);
     }
 
   }
@@ -77,7 +74,13 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
-
+    // console.log('AccWid clear()');
+    const accounts = Array.from(document.querySelectorAll('li.account'));
+    if (accounts) {
+      accounts.forEach( ( element ) => {
+        element.remove();
+      });
+    }
   }
 
   /**
@@ -88,7 +91,18 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
-
+    // console.log('== == == == == ', element);
+    const parentLi = element.closest('li');
+    const accounts = Array.from(document.querySelectorAll('li.account'));
+    if (accounts) {
+      accounts.forEach( (item, index) => {
+        item.classList.remove('active');
+        if (parentLi === item) {
+          parentLi.classList.add('active');
+        }
+      });
+    }
+    //const accountsPanel = document.querySelector('ul.accounts-panel');
   }
 
   /**
@@ -97,7 +111,30 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML(item){
+    const accountsPanel = document.querySelector('ul.accounts-panel');
 
+    let accountLi = document.createElement('li');
+    accountLi.classList.add('account');
+    accountLi.dataset.id = item.id;
+
+    accountsPanel.insertAdjacentElement('beforeend', accountLi);
+    
+    let accountAnchor = document.createElement('a');
+    accountAnchor.href = "#";
+    accountLi.insertAdjacentElement('beforeend', accountAnchor);
+    
+    let spanName = document.createElement('span');
+    spanName.textContent = item.name;
+    accountAnchor.insertAdjacentElement('beforeend', spanName);
+    accountAnchor.innerHTML += ' / ';
+    
+    let spanSum = document.createElement('span');
+    spanSum.textContent = item.sum + ' ₽';
+    accountAnchor.insertAdjacentElement('beforeend', spanSum);
+    
+    accountAnchor.addEventListener('click', (item) => {
+      this.onSelectAccount(item.target);       
+    });
   }
 
   /**
@@ -107,6 +144,9 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-
+    // console.log('AccWid renderItem()', data);
+    data.forEach ( (item) => {
+      this.getAccountHTML(item);
+    });
   }
 }

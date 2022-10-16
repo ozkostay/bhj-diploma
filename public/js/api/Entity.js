@@ -13,31 +13,16 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static list(data, callback){
+    
+    // console.log('Entity list callback: ', callback);
     createRequest({
       url: 'account/',
       method: 'GET',
       responseType: 'json',
       data : data,
-      callback: (err, response) => {
-        if (response) {
-          console.log('dddddddddddddd ', response);
-          //AccountsWidget.renderItem(response);
-          //console.log('dddddddddddddd ', response.data);
-          //this.clear();
-          //Account.list( response );
-          //sss = response;
-          //console.log(sss);
-          //return response;      
-          //User.setCurrent(response.user);
-          //data.reset();
-          //App.getModal('createAccount:').close(); // 
-          //App.setState('user-logged');
-          console.log('AccWidget YES!!!', response);
-        } else {
-          alert(err);
-        }
-      }
+      callback: callback,
     });
+    //return accoutList;
   }
 
   /**
@@ -46,7 +31,13 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
-
+    createRequest({
+      url: 'account/',
+      method: 'PUT',
+      responseType: 'json',
+      data : data,
+      callback: callback,
+    });
   }
 
   /**
@@ -54,6 +45,12 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static remove(data, callback ) {
-
+    createRequest({
+      url: 'account/',
+      method: 'DELETE',
+      responseType: 'json',
+      data : data,
+      callback: callback,
+    });
   }
 }

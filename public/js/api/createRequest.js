@@ -12,32 +12,30 @@ const createRequest = (options) => {
       // console.log('Запрос ' + options.method + ' выполнен');
       // console.log('error', xhr.response.error);
       // console.log('response', xhr.response);
-      let aaa = () => options.callback(xhr.response.error, xhr.response);
+      let callback = () => options.callback(xhr.response.error, xhr.response);
       // Без setTimeout() при создании нового счета виджет при App.update() не отображает новый счет
       // Как будто не успевает. По этому поставил setTimeout()
-      setTimeout(aaa , 600);
+      setTimeout(callback , 600);
     } else {
       // console.error('Запрос не выполнен/ Статус: ', xhr.status, xhr.response);
     }
   };
   
-  console.log('crReq metod!!!!!!!!!!!!!! ', options.method, options.data)
+  // console.log('crReq metod!!!!!!!!!!!!!! ', options.method, options.data)
 
   if ( options.method !== "GET" ) {
-    // console.log('not GET');
-    let formData;
-    if (options.method === 'DELETE') {
-      formData = options.data;
-    } else {
-      formData = new FormData(options.data);
-    }
     xhr.open(options.method, options.url);
     xhr.responseType = options.responseType;
+    if ( options.method !== "DELETE" ) {
+      formData = new FormData(options.data);
+    } else {
+      formData = new FormData();
+      formData.append('id', options.data.id);
+    }
     xhr.send(formData);
   } else {
-    // console.log('GET!!!');
+    console.log('777 ', options.url + '?id=' + encodeURIComponent(options.data.id));
     const url = options.url + '?id=' + encodeURIComponent(options.data.id);
-    // console.log('url: ', url);
     xhr.open(options.method, url);
     xhr.responseType = options.responseType;
     xhr.send();

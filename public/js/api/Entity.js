@@ -3,9 +3,7 @@
  * Имеет свойство URL, равно пустой строке.
  * */
 class Entity {
-  constructor() {
-    this.URL = "";
-  }
+  static URL = "";
   //
   /**
    * Запрашивает с сервера список данных.
@@ -14,9 +12,9 @@ class Entity {
    * */
   static list(data, callback){
     
-    // console.log('Entity list callback: ', callback);
+    console.log('Entity list callback: ', callback);
     createRequest({
-      url: 'account/',
+      url: this.URL + 'account/',
       method: 'GET',
       responseType: 'json',
       data : data,
@@ -31,8 +29,9 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
+    console.log('WWW====== ', data);
     createRequest({
-      url: 'account/',
+      url: this.URL + 'account/',
       method: 'PUT',
       responseType: 'json',
       data : data,
@@ -46,7 +45,7 @@ class Entity {
    * */
   static remove(data, callback ) {
     createRequest({
-      url: 'account/',
+      url: this.URL + 'account/',
       method: 'DELETE',
       responseType: 'json',
       data : data,

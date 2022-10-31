@@ -11,8 +11,6 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static list(data, callback){
-    
-    console.log('Entity list callback: ', callback);
     createRequest({
       url: this.URL + 'account/',
       method: 'GET',
@@ -30,11 +28,13 @@ class Entity {
    * */
   static create(data, callback) {
     console.log('WWW====== ', data);
+    const dataFromForm = {};
+    dataFromForm[data.elements.name.name] = data.elements.name.value;
     createRequest({
       url: this.URL + 'account/',
       method: 'PUT',
       responseType: 'json',
-      data : data,
+      data : dataFromForm,
       callback: callback,
     });
   }

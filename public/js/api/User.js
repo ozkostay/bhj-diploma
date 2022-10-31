@@ -11,7 +11,6 @@ class User {
    * локальном хранилище.
    * */
   static setCurrent(user) {
-    //console.log('User.setCurrent() ', user);
     localStorage.setItem('id', user.id);
     localStorage.setItem('name', user.name);
   }
@@ -41,7 +40,6 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    //console.log('User.fetch() ', callback);
     callback();
   }
 
@@ -52,13 +50,15 @@ class User {
    * User.setCurrent.
    * */
   static login(data, callback) {
-    console.log('User.login');
+    const dataFromForm = {};
+    dataFromForm[data.elements.email.name] = data.elements.email.value;
+    dataFromForm[data.elements.password.name] = data.elements.password.value;
     createRequest({
       //==========================
       url: User.URL + '/login',
       method: 'POST',
       responseType: 'json',
-      data,
+      data: dataFromForm,
       callback: (err, response) => {
         if (response && response.user) {
           User.setCurrent(response.user);
@@ -81,12 +81,16 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-    //console.log('User.register() ', data);
+    const dataFromForm = {};
+    dataFromForm[data.elements.name.name] = data.elements.name.value;
+    dataFromForm[data.elements.email.name] = data.elements.email.value;
+    dataFromForm[data.elements.password.name] = data.elements.password.value;
+    
     createRequest({
       url: User.URL + '/register',
       method: 'POST',
       responseType: 'json',
-      data,
+      data: dataFromForm,
       callback: (err, response) => {
         if (response && response.user) {
           User.setCurrent(response.user);

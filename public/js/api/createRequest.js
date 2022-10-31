@@ -4,8 +4,14 @@
  * */
 const createRequest = (options) => {
   //======================================================
-  console.log('createRequest', options);  
+  // console.log('======== !!!!= =========== options.data, выходим', options.data)
+  // if (!options.data) {
+  //   console.log('Нет options.data, выходим');
+  //   return;
+  // }
+  
   const xhr = new XMLHttpRequest();
+  formData = new FormData();
   xhr.onload = function() {
     // console.log('STATUS ', xhr.status);
     if (  xhr.status === 200 ) {
@@ -21,23 +27,19 @@ const createRequest = (options) => {
     }
   };
   
-  // console.log('crReq metod!!!!!!!!!!!!!! ', options.method, options.data)
-
-  if ( options.method !== "GET" ) {
-    xhr.open(options.method, options.url);
-    xhr.responseType = options.responseType;
-    if ( options.method !== "DELETE" ) {
-      formData = new FormData(options.data);
-    } else {
-      formData = new FormData();
-      formData.append('id', options.data.id);
+  xhr.responseType = options.responseType;
+  if ( options.method !== 'GET' ) {
+    for (let key in options.data) {
+      formData.append(key, options.data[key]);
     }
+    xhr.open(options.method, options.url);
     xhr.send(formData);
   } else {
-    console.log('777 ', options.url + '?id=' + encodeURIComponent(options.data.id));
-    const url = options.url + '?id=' + encodeURIComponent(options.data.id);
-    xhr.open(options.method, url);
-    xhr.responseType = options.responseType;
+    options.url += '?';
+    for (let key in options.data) {
+      options.url += `${key}=${options.data[key]}&`;
+    }
+    xhr.open(options.method, options.url);
     xhr.send();
   }
   //======================================================

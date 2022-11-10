@@ -19,13 +19,13 @@ const createRequest = (options) => {
       // console.log('error', xhr.response.error);
       // console.log('response', xhr.response);
       
-      //let callback = () => options.callback(xhr.response.error, xhr.response);
-      options.callback(xhr.response.error, xhr.response);
+      let callback = () => options.callback(xhr.response.error, xhr.response);
+      // options.callback(xhr.response.error, xhr.response);
       
       // Без setTimeout() при создании нового счета виджет при App.update() не отображает новый счет
       // Как будто не успевает. По этому поставил setTimeout()
       
-      // setTimeout(callback , 600);
+      setTimeout(callback , 600);
     } else {
       // console.error('Запрос не выполнен/ Статус: ', xhr.status, xhr.response);
     }

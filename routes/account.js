@@ -59,7 +59,7 @@ router.get("/:id?", upload.none(), function(request, response) {
       response.json({success: false, error:"Пользователь не авторизован"});
       return;
     }
-
+    console.log('=!= =        ', request.params.id);
     let accountId = request.params.id;
 
     if(accountId){

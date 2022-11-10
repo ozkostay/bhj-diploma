@@ -7,25 +7,109 @@
       "id": "1"
     },
     {
-      "name": "ss",
-      "email": "ss@ss",
-      "password": "ss",
-      "id": "6mlr2i57nhl9wlshtn"
+      "name": "qq",
+      "email": "qq@qq",
+      "password": "qq",
+      "id": "8cyi0ici6l8h1z6m8"
+    },
+    {
+      "name": "ww",
+      "email": "ww@ww",
+      "password": "ww",
+      "id": "8cyi0ick4l8h1zwtu"
+    },
+    {
+      "name": "qqq",
+      "email": "qqq@qqq",
+      "password": "qqq",
+      "id": "8cyi0iev4l8h60n46"
+    },
+    {
+      "name": "vv",
+      "email": "vv@vv",
+      "password": "vv",
+      "id": "8cyi0i9bjla71uo95"
+    },
+    {
+      "name": "zz",
+      "email": "zz@zz",
+      "password": "zz",
+      "id": "8cyi0i763la8d6zio"
     }
   ],
   "accounts": [
+    {
+      "name": "Магазин",
+      "user_id": "1",
+      "id": "2"
+    },
     {
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
     },
     {
-      "name": "QIWI",
-      "user_id": "1",
-      "id": "6mlr2i58wvl9wn0arq"
+      "name": "aaa",
+      "user_id": "8cyi0i9bjla71uo95",
+      "id": "8cyi0i9dnla71v4tp"
+    },
+    {
+      "name": "111",
+      "user_id": "8cyi0ici6l8h1z6m8",
+      "id": "8cyi0i6sxlab7lymw"
+    },
+    {
+      "name": "222",
+      "user_id": "8cyi0ici6l8h1z6m8",
+      "id": "8cyi0i6wolab7m310"
     }
   ],
   "transactions": [
+    {
+      "account_id": "2",
+      "created_at": "2019-09-26 16:23:02",
+      "id": "4",
+      "name": "Молочные продукты",
+      "sum": 100,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-25 15:03:02",
+      "id": "5",
+      "name": "Фрукты",
+      "sum": 250,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-25 15:03:02",
+      "id": "17",
+      "name": "Овощи",
+      "sum": 300,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-26 14:47:02",
+      "id": "6",
+      "name": "Мясо",
+      "sum": 600,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-27 13:27:02",
+      "id": "7",
+      "name": "Долг в банк",
+      "sum": 5000,
+      "type": "expense",
+      "user_id": "1"
+    },
     {
       "account_id": "3",
       "created_at": "2017-10-15 13:27:02",

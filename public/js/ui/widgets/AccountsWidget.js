@@ -51,19 +51,18 @@ class AccountsWidget {
     console.log('AccWid update()');
     const isThereUser = User.current();
     if (isThereUser) {
-      //console.log('YES AccWidg update()', isThereUser);
+      // console.log('YES AccWidg update()', isThereUser);
       const data = {};
       data.id = localStorage.getItem('id').trim();
       Account.list(data, (err, response) => {
         if (response.success) {
           this.clear();
-          //console.log('AccWid 60 ', response.data);
+          // console.log('AccWid 60 ', response.data);
           this.renderItem(response.data);
         } else {
           alert(err);
         }
       });
-      
     } else {
       //console.log('NO AccWidg update()', isThereUser);
     }
@@ -96,15 +95,18 @@ class AccountsWidget {
     // console.log('== == == == == ', element);
     const parentLi = element.closest('li');
     const accounts = Array.from(document.querySelectorAll('li.account'));
+    let activeId;
     if (accounts) {
       accounts.forEach( (item, index) => {
         item.classList.remove('active');
         if (parentLi === item) {
           parentLi.classList.add('active');
+          activeId = parentLi.dataset.id;
         }
       });
     }
-    //const accountsPanel = document.querySelector('ul.accounts-panel');
+    console.log('Cruto!!!!!!!!!! id^ ', activeId);
+    App.showPage( 'transactions', { account_id: activeId });
   }
 
   /**

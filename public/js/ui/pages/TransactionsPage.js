@@ -31,6 +31,7 @@ class TransactionsPage {
   registerEvents() {
     const buttonRemoveAccount = document.querySelector('button.remove-account');
     buttonRemoveAccount.addEventListener('click', () => {
+      this.aaa = 5;
       this.removeAccount();
     });
   }
@@ -52,10 +53,16 @@ class TransactionsPage {
       const accounts = Array.from(document.querySelectorAll('li.account'));
       if (accounts) {
         const activeAccount = accounts.find((item) => item.classList.contains('active'));
-        // console.log('ID ================= ', activeAccount);
-        data.id = activeAccount.dataset.id
+        console.log('ID ================= ', activeAccount);
+        if (!activeAccount) {
+          alert('Счет не выбран');
+          return;
+        }
+        data.id = activeAccount.dataset.id;
       }
-      
+      console.log('GGGGGGGGGGGGGGGG111 ', accounts);
+      // console.log('GGGGGGGGGGGGGGGG222 ', activeAccount);
+      // Проверить на активность счета !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       Account.remove(data, (err, response) => {
         if (response.success) {
           // console.log('dddddddddddddd ', response);
@@ -87,7 +94,15 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render(options){
-
+    console.log('TP render ', options);
+    Account.get(options, (err, response) => {
+      if (response.success) {
+        this.renderTitle(response.data);
+      } else {
+        alert(err);
+      }
+    });
+    console.log('BBB2 ', this.aaa);
   }
 
   /**
@@ -103,7 +118,7 @@ class TransactionsPage {
    * Устанавливает заголовок в элемент .content-title
    * */
   renderTitle(name){
-
+    console.log('renderTitle ',name);
   }
 
   /**

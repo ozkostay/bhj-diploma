@@ -16,7 +16,6 @@ class AccountsWidget {
   constructor( element ) {
     this.element = element;
     this.registerEvents();
-    this.update();
   }
 
   /**
@@ -30,7 +29,6 @@ class AccountsWidget {
     // this.element
     const newAccount = document.querySelector('.create-account');
     newAccount.addEventListener('click', (event) => {
-      //const aaa = App.getWidget('accounts');
       App.getModal('createAccount').open();
     });
 
@@ -48,25 +46,20 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
-    console.log('AccWid update()');
+    // console.log('AccWid update()');
     const isThereUser = User.current();
     if (isThereUser) {
-      // console.log('YES AccWidg update()', isThereUser);
       const data = {};
       data.id = localStorage.getItem('id').trim();
       Account.list(data, (err, response) => {
         if (response.success) {
           this.clear();
-          // console.log('AccWid 60 ', response.data);
           this.renderItem(response.data);
         } else {
-          alert(err);
+          alert('AcWi' + err);
         }
       });
-    } else {
-      //console.log('NO AccWidg update()', isThereUser);
     }
-
   }
 
   /**
@@ -105,7 +98,7 @@ class AccountsWidget {
         }
       });
     }
-    console.log('Cruto!!!!!!!!!! id^ ', activeId);
+    // console.log('Cruto!!!!!!!!!! id^ ', activeId);
     App.showPage( 'transactions', { account_id: activeId });
   }
 

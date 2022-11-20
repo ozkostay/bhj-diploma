@@ -179,7 +179,6 @@ class App {
    * Вызывает методы updateWidgets и updatePages()
    * */
   static update() {
-    console.log('AppUpdate()');
     this.updateWidgets();
     this.updatePages();
     this.updateForms();

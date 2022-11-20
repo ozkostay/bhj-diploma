@@ -22,7 +22,7 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
-    console.log('Asy registerEvents');
+    // console.log('Asy registerEvents');
     const submitButton = this.element.closest("div.modal-content").querySelector('button.btn-primary');
     submitButton.addEventListener('click', (event) => {
       event.preventDefault();
@@ -38,18 +38,16 @@ class AsyncForm {
    * }
    * */
   getData() {
-    // console.log('Async getData ', this.element);
-    let data = this.element;
-    if ( (this.element.id === 'login-form') || (this.element.id === 'register-form') ) {
-      data = this.element;
-    } else {
-      data = {
-        email: 'demo@demo',
-        password: 'demo'
-      }; // На следующих этапах поправить при работе с другими формами
-    }
-    //console.log('DD_Data ', data);
-    return this.element;
+    const dataFromForm = {};
+    const inputName = Array.from(this.element.querySelectorAll('[name]'));
+    inputName.forEach((item) => {
+      if(item.name === 'sum') {
+        dataFromForm[item.name] = Number(item.value);
+      } else {
+        dataFromForm[item.name] = item.value;
+      }
+    });
+    return dataFromForm;
   }
 
   onSubmit(options){

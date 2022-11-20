@@ -13,14 +13,12 @@
    * */
 
   static get(id = '', callback){
-    console.log('Acc get id:', id, ' === ', callback );
+    // console.log('Acc get id:', id, ' === ', callback );
     createRequest({
-      url: this.URL,
+      url: this.URL + '/' + id.account_id,
       method: 'GET',
       responseType: 'json',
-      data : id,
       callback: callback,
     });
-    // console.log('aaa', aaa);
   }
 }

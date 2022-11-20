@@ -11,6 +11,7 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static list(data, callback){
+    // console.log('LIST data: ', data, 'call^ ',callback);
     createRequest({
       url: this.URL,
       method: 'GET',
@@ -18,7 +19,6 @@ class Entity {
       data : data,
       callback: callback,
     });
-    //return accoutList;
   }
 
   /**
@@ -27,27 +27,12 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
-    console.log('WWW====== ', data);
-    const dataFromForm = {};
-    const inputName = Array.from(data.querySelectorAll('[name]'));
-    // console.log('names: ', inputName);
-    inputName.forEach((item) => {
-      // console.log('???== name: ', item.name, ' value: ',item.value);
-      if(item.name === 'sum') {
-        dataFromForm[item.name] = Number(item.value);
-      } else {
-        dataFromForm[item.name] = item.value;
-      }
-    });
-    // console.log(dataFromForm);
-    // sum
-    // account_id
-
+    // console.log('WWW====== ', data);
     createRequest({
       url: this.URL,
       method: 'PUT',
       responseType: 'json',
-      data : dataFromForm,
+      data : data,
       callback: callback,
     });
   }

@@ -16,7 +16,7 @@
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-    // console.log('FFFFFFFFFFFF renderAccountsList', this.element);
+    // console.log('renderAccountsList', this.element);
     const data = {};
     data.id = localStorage.getItem('id').trim();
     Account.list(data, (err, response) => {
@@ -52,13 +52,13 @@
   onSubmit(data) {
     // console.log('Доход Расход :-)', data);
     let curentModal = 'newExpense';
-    if (data.id === "new-income-form") {
+    if (data.type === "income") {
       curentModal = 'newIncome';
     }
 
     Transaction.create(data, (err, response) => {
       if (response.success) {
-        data.reset();
+        this.element.reset();
         App.getModal(curentModal).close();
         App.update();
       } else {

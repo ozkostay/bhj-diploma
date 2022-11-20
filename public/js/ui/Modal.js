@@ -28,19 +28,6 @@ class Modal {
         this.onClose();
       })
     });
-    
-    // const submitButton = this.element.querySelector('.btn-primary');
-    // //console.log('bbb ', submitButton.getAttribute('form'));
-    // submitButton.addEventListener('click', () => {
-    // //   //console.log(submitButton.form.value);
-    //   //LoginForm.onSubmit();
-    //   // LoginForm
-    //   console.log('press button');
-    //   // let aaa = new LoginForm();
-    //   // aaa.onSubmit('data_bebe');
-    //   let aaa = App.forms;
-    //   console.log('ddddd ',aaa);
-    // })
   }
 
   /**
@@ -48,7 +35,7 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    console.log('=!=== e', e);
+    // console.log('=!=== e', e);
     this.close();
   }
   /**
@@ -56,7 +43,7 @@ class Modal {
    * со значением «block»
    * */
   open() {
-    console.log('Modal.open()');
+    // console.log('Modal.open()');
     this.element.setAttribute('style', 'display: block');
   }
   /**

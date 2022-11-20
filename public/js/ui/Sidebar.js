@@ -44,13 +44,12 @@ class Sidebar {
         } else if ( item.classList.contains('menu-item_register') ) {
           App.getModal('register').open();
         } else if ( item.classList.contains('menu-item_logout') ) {
-          User.unsetCurrent();
-          //localStorage.clear();
-          //App.setState( 'init' );
+          User.logout(()=> {
+            User.unsetCurrent();
+          });
+          App.setState( 'init' );
         }
       });    
     });
-
-    
   }
 }
